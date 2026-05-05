@@ -30,6 +30,28 @@
             --transition: all 0.3s ease;
             --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             --font-mono: 'Courier New', monospace;
+            
+            /* Tema Claro */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --card-bg: #ffffff;
+            --input-bg: #f1f5f9;
+            --border-light: #e2e8f0;
+        }
+
+        /* Tema Oscuro */
+        html.dark-mode {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --header-bg: rgba(15, 23, 42, 0.95);
+            --card-bg: #1e293b;
+            --input-bg: #334155;
+            --border-light: #334155;
         }
 
         * {
@@ -44,10 +66,11 @@
 
         body {
             font-family: var(--font-sans);
-            color: var(--text-dark);
-            background-color: #ffffff;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            transition: var(--transition);
         }
 
         /* ============================
@@ -71,7 +94,7 @@
         }
 
         p {
-            color: var(--text-light);
+            color: var(--text-secondary);
             margin-bottom: 1rem;
         }
 
@@ -100,11 +123,12 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.95);
+            background: var(--header-bg);
             backdrop-filter: blur(10px);
             box-shadow: var(--shadow-md);
             z-index: 1000;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-light);
+            transition: var(--transition);
         }
 
         nav {
@@ -114,6 +138,7 @@
             padding: 1rem 2rem;
             max-width: 1400px;
             margin: 0 auto;
+            width: 100%;
         }
 
         .logo {
@@ -124,6 +149,12 @@
             letter-spacing: 0.05em;
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
         .nav-menu {
             display: flex;
             list-style: none;
@@ -131,9 +162,10 @@
         }
 
         .nav-link {
-            color: var(--text-dark);
+            color: var(--text-primary);
             font-weight: 500;
             position: relative;
+            transition: var(--transition);
         }
 
         .nav-link::after {
@@ -154,19 +186,48 @@
         .nav-toggle {
             display: none;
             background: none;
-            border: 2px solid var(--text-dark);
+            border: 2px solid var(--text-primary);
             padding: 0.5rem;
             border-radius: 0.25rem;
             cursor: pointer;
+            transition: var(--transition);
         }
 
         .nav-toggle span {
             display: block;
             width: 25px;
             height: 3px;
-            background-color: var(--text-dark);
+            background-color: var(--text-primary);
             margin: 5px 0;
             transition: var(--transition);
+        }
+
+        /* ============================
+           THEME TOGGLE
+           ============================ */
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--primary-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            transition: var(--transition);
+            color: var(--primary-color);
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .theme-toggle.dark {
+            transform: rotate(180deg);
         }
 
         /* ============================
@@ -276,11 +337,13 @@
 
         .section {
             padding: 5rem 2rem;
-            background-color: #ffffff;
+            background-color: var(--bg-primary);
+            transition: var(--transition);
         }
 
         .section-dark {
-            background-color: var(--light-bg);
+            background-color: var(--bg-secondary);
+            transition: var(--transition);
         }
 
         .section-title {
@@ -292,7 +355,7 @@
         }
 
         .section-title h2 {
-            color: var(--text-dark);
+            color: var(--text-primary);
             margin-bottom: 0.5rem;
         }
 
@@ -342,6 +405,7 @@
         .about-content p {
             margin-bottom: 1.5rem;
             line-height: 1.8;
+            color: var(--text-secondary);
         }
 
         .about-stats {
@@ -354,9 +418,10 @@
         .stat-box {
             text-align: center;
             padding: 1.5rem;
-            background-color: var(--light-bg);
+            background-color: var(--bg-secondary);
             border-radius: 0.5rem;
             border-left: 4px solid var(--primary-color);
+            transition: var(--transition);
         }
 
         .stat-number {
@@ -366,7 +431,7 @@
         }
 
         .stat-label {
-            color: var(--text-light);
+            color: var(--text-secondary);
             font-size: 0.9rem;
         }
 
@@ -380,7 +445,7 @@
         }
 
         .skill-category {
-            background: white;
+            background: var(--card-bg);
             padding: 2rem;
             border-radius: 0.75rem;
             box-shadow: var(--shadow-md);
@@ -407,6 +472,7 @@
             justify-content: space-between;
             margin-bottom: 0.5rem;
             font-weight: 600;
+            color: var(--text-primary);
         }
 
         .skill-percentage {
@@ -417,7 +483,7 @@
         .skill-bar {
             width: 100%;
             height: 8px;
-            background-color: var(--border-color);
+            background-color: var(--border-light);
             border-radius: 10px;
             overflow: hidden;
         }
@@ -446,13 +512,13 @@
         }
 
         .project-card {
-            background: white;
+            background: var(--card-bg);
             border-radius: 0.75rem;
             overflow: hidden;
             box-shadow: var(--shadow-md);
             transition: var(--transition);
             cursor: pointer;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border-light);
         }
 
         .project-card:hover {
@@ -504,8 +570,12 @@
         }
 
         .project-content h3 {
-            color: var(--text-dark);
+            color: var(--text-primary);
             margin-bottom: 0.5rem;
+        }
+
+        .project-content p {
+            color: var(--text-secondary);
         }
 
         .project-tech {
@@ -518,11 +588,12 @@
         .tech-tag {
             display: inline-block;
             padding: 0.35rem 0.75rem;
-            background-color: var(--light-bg);
+            background-color: var(--bg-secondary);
             color: var(--primary-color);
             border-radius: 0.25rem;
             font-size: 0.85rem;
             font-weight: 500;
+            transition: var(--transition);
         }
 
         .project-links {
@@ -565,10 +636,11 @@
             margin-bottom: 2rem;
             width: 50%;
             padding: 1.5rem;
-            background: white;
+            background: var(--card-bg);
             border-radius: 0.5rem;
             box-shadow: var(--shadow-md);
             border-left: 4px solid var(--primary-color);
+            transition: var(--transition);
         }
 
         .timeline-item:nth-child(even) {
@@ -588,6 +660,11 @@
             font-size: 1.1rem;
             font-weight: 600;
             margin: 0.5rem 0;
+            color: var(--text-primary);
+        }
+
+        .timeline-item p {
+            color: var(--text-secondary);
         }
 
         /* ============================
@@ -626,12 +703,13 @@
         }
 
         .contact-details h4 {
-            color: var(--text-dark);
+            color: var(--text-primary);
             margin-bottom: 0.25rem;
         }
 
         .contact-details p {
             margin: 0;
+            color: var(--text-secondary);
         }
 
         /* FORMULARIO */
@@ -649,17 +727,24 @@
         .form-group label {
             margin-bottom: 0.5rem;
             font-weight: 600;
-            color: var(--text-dark);
+            color: var(--text-primary);
         }
 
         .form-group input,
         .form-group textarea {
             padding: 0.75rem 1rem;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border-light);
             border-radius: 0.5rem;
             font-family: var(--font-sans);
             font-size: 1rem;
             transition: var(--transition);
+            background-color: var(--input-bg);
+            color: var(--text-primary);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-secondary);
         }
 
         .form-group input:focus,
@@ -696,6 +781,7 @@
             border-radius: 0.5rem;
             text-align: center;
             display: none;
+            transition: var(--transition);
         }
 
         .form-message.success {
@@ -714,11 +800,20 @@
            FOOTER
            ============================ */
         footer {
-            background: var(--text-dark);
-            color: white;
+            background: var(--text-primary);
+            color: var(--bg-primary);
             text-align: center;
             padding: 3rem 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+
+        footer p {
+            color: rgba(241, 245, 249, 0.7);
+        }
+
+        html.dark-mode footer p {
+            color: rgba(241, 245, 249, 0.7);
         }
 
         .social-links {
@@ -759,6 +854,10 @@
             }
 
             .nav-menu {
+                gap: 1rem;
+            }
+
+            .nav-right {
                 gap: 1rem;
             }
 
@@ -826,7 +925,8 @@
                 left: 0;
                 right: 0;
                 flex-direction: column;
-                background: white;
+                background: var(--bg-primary);
+                border-bottom: 1px solid var(--border-light);
                 padding: 1rem;
                 box-shadow: var(--shadow-md);
             }
@@ -908,19 +1008,22 @@
     <header>
         <nav>
             <div class="logo">Bryan</div>
-            <button class="nav-toggle" id="navToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#home" class="nav-link">Inicio</a></li>
-                <li><a href="#about" class="nav-link">Acerca de</a></li>
-                <li><a href="#skills" class="nav-link">Habilidades</a></li>
-                <li><a href="#projects" class="nav-link">Proyectos</a></li>
-                <li><a href="#experience" class="nav-link">Experiencia</a></li>
-                <li><a href="#contact" class="nav-link">Contacto</a></li>
-            </ul>
+            <div class="nav-right">
+                <button class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="nav-link">Inicio</a></li>
+                    <li><a href="#about" class="nav-link">Acerca de</a></li>
+                    <li><a href="#skills" class="nav-link">Habilidades</a></li>
+                    <li><a href="#projects" class="nav-link">Proyectos</a></li>
+                    <li><a href="#experience" class="nav-link">Experiencia</a></li>
+                    <li><a href="#contact" class="nav-link">Contacto</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle" title="Cambiar tema">🌙</button>
+            </div>
         </nav>
     </header>
 
@@ -942,7 +1045,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Acerca de Mí</h2>
-                <p style="color: var(--text-light); margin-top: 1rem;">Conoce mi historia y experiencia</p>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">Conoce mi historia y experiencia</p>
             </div>
 
             <div class="about">
@@ -993,7 +1096,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Habilidades Técnicas</h2>
-                <p style="color: var(--text-light); margin-top: 1rem;">Tecnologías en las que soy experto</p>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">Tecnologías en las que soy experto</p>
             </div>
 
             <div class="skills-grid">
@@ -1137,7 +1240,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Proyectos Destacados</h2>
-                <p style="color: var(--text-light); margin-top: 1rem;">Algunos de mis mejores trabajos</p>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">Algunos de mis mejores trabajos</p>
             </div>
 
             <div class="projects-grid">
@@ -1283,7 +1386,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Experiencia Profesional</h2>
-                <p style="color: var(--text-light); margin-top: 1rem;">Mi trayectoria en el mundo tech</p>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">Mi trayectoria en el mundo tech</p>
             </div>
 
             <div class="timeline">
@@ -1323,7 +1426,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Ponte en Contacto</h2>
-                <p style="color: var(--text-light); margin-top: 1rem;">¿Tienes un proyecto? Déjame saber</p>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">¿Tienes un proyecto? Déjame saber</p>
             </div>
 
             <div class="contact-content">
@@ -1340,7 +1443,7 @@
                         <div class="contact-icon">📱</div>
                         <div class="contact-details">
                             <h4>Teléfono</h4>
-                            <p><a href="tel:+1234567890">+1 (234) 567-890</a></p>
+                            <p><a href="tel:+1234567890">+58 312-5002407</a></p>
                         </div>
                     </div>
 
@@ -1348,7 +1451,7 @@
                         <div class="contact-icon">📍</div>
                         <div class="contact-details">
                             <h4>Ubicación</h4>
-                            <p>Ciudad de México, México</p>
+                            <p>Ciudad de Arauca, Arauca, Colombia</p>
                         </div>
                     </div>
 
@@ -1603,9 +1706,66 @@
                 if (link.getAttribute('href').slice(1) === current) {
                     link.style.color = 'var(--primary-color)';
                 } else {
-                    link.style.color = 'var(--text-dark)';
+                    link.style.color = 'var(--text-primary)';
                 }
             });
+        });
+
+        // ============================
+        // THEME TOGGLE
+        // ============================
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        // Verificar preferencia guardada o preferencia del sistema
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('theme-preference');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme) {
+                if (savedTheme === 'dark') {
+                    html.classList.add('dark-mode');
+                    themeToggle.textContent = '☀️';
+                } else {
+                    html.classList.remove('dark-mode');
+                    themeToggle.textContent = '🌙';
+                }
+            } else if (prefersDark) {
+                html.classList.add('dark-mode');
+                themeToggle.textContent = '☀️';
+            } else {
+                html.classList.remove('dark-mode');
+                themeToggle.textContent = '🌙';
+            }
+        }
+
+        // Inicializar tema al cargar
+        initializeTheme();
+
+        // Escuchar cambios de tema
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark-mode');
+            
+            if (html.classList.contains('dark-mode')) {
+                localStorage.setItem('theme-preference', 'dark');
+                themeToggle.textContent = '☀️';
+            } else {
+                localStorage.setItem('theme-preference', 'light');
+                themeToggle.textContent = '🌙';
+            }
+        });
+
+        // Detectar cambios de preferencia del sistema
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme-preference')) {
+                if (e.matches) {
+                    html.classList.add('dark-mode');
+                    themeToggle.textContent = '☀️';
+                } else {
+                    html.classList.remove('dark-mode');
+                    themeToggle.textContent = '🌙';
+                }
+            }
         });
     </script>
 </body>
